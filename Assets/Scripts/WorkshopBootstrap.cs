@@ -168,13 +168,15 @@ namespace Workshop
                 Mats.Box("Колонна", rt, new Vector3(x + 2.75f, 3.5f, 11.55f), new Vector3(0.5f, 7f, 0.5f), steel);
             }
 
-            // фермы и светильники
+            // светильники (без теней; балок под потолком нет, чтобы они не закрывали обзор сверху)
             for (int i = -3; i <= 3; i++)
             {
                 float x = i * 5.5f;
-                Mats.Box("Балка", rt, new Vector3(x, 7.0f, 0f), new Vector3(0.3f, 0.45f, 24f), steel);
                 for (int s = -1; s <= 1; s += 2)
-                    Mats.Box("Светильник", rt, new Vector3(x, 6.5f, s * 5f), new Vector3(0.7f, 0.08f, 3f), lamp);
+                {
+                    var lampObj = Mats.Box("Светильник", rt, new Vector3(x, 6.5f, s * 5f), new Vector3(0.7f, 0.08f, 3f), lamp);
+                    lampObj.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                }
             }
 
             // разметка пола
